@@ -1,0 +1,117 @@
+{%  extends "./plantilla.html" %}
+{%  block contenido %}
+
+<style>
+    /* Estilo general */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    /* Contenedor del formulario */
+    form {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Título */
+    h3 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    /* Etiquetas y campos de entrada */
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    input[type="text"], input[type="number"], textarea, select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    input[type="text"]:focus, input[type="number"]:focus, textarea:focus, select:focus {
+        border-color: #007BFF;
+        outline: none;
+    }
+
+    textarea {
+        resize: none;
+        height: 80px;
+    }
+
+    /* Botones */
+    button {
+        width: 48%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    button[type="submit"] {
+        background-color: #007BFF;
+        color: #fff;
+    }
+
+    button[type="reset"] {
+        background-color: #ccc;
+        color: #333;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    button[type="reset"]:hover {
+        background-color: #999;
+    }
+
+    /* Separación entre botones */
+    button + button {
+        margin-left: 4%;
+    }
+</style>
+
+<form action="/guardarhabito/" method="post">
+    <h3>Agregar Nuevo Hábito</h3>
+    {% csrf_token %}
+
+    <label for="txt_nombre_habito">Nombre del Hábito:</label>
+    <input type="text" name="txt_nombre_habito" id="txt_nombre_habito" required>
+
+    <label for="txt_descripcion">Descripción:</label>
+    <textarea name="txt_descripcion" id="txt_descripcion"></textarea>
+
+    <label for="txt_meta_diaria">Meta Diaria:</label>
+    <input type="number" name="txt_meta_diaria" id="txt_meta_diaria" required>
+
+    <label for="usuario_id">Usuario:</label>
+    <select name="usuario_id" id="usuario_id">
+        {% for usuario in usuarios %}
+            <option value="{{ usuario.id }}">{{ usuario.nombre }}</option>
+        {% endfor %}
+    </select>
+
+    <div style="display: flex; justify-content: space-between;">
+        <button type="submit">Guardar</button>
+        <button type="reset">Cancelar</button>
+    </div>
+</form>
+
+{% endblock %}

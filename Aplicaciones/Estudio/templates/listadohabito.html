@@ -1,0 +1,80 @@
+{% extends "./plantilla.html" %}
+
+{% block contenido %}
+
+<style>
+    /* Estilos generales para la tabla */
+    .tabla-habitos {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+
+    .tabla-habitos th, .tabla-habitos td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+
+    .tabla-habitos th {
+        background-color: #f4f4f4;
+    }
+
+    /* Estilo de los botones */
+    .btn {
+        text-decoration: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 0.9em;
+        cursor: pointer;
+    }
+
+    .btn-warning {
+        background-color: #f39c12;
+        color: white;
+    }
+
+    .btn-danger {
+        background-color: #e74c3c;
+        color: white;
+    }
+
+    /* Estilo de los botones al pasar el mouse */
+    .btn:hover {
+        opacity: 0.8;
+    }
+</style>
+
+<table class="tabla-habitos">
+    <thead>
+        <tr>
+            <th>Nombre del Hábito</th>
+            <th>Descripción</th>
+            <th>Meta Diaria</th>
+            <th>Usuario</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for habito in habitos %}
+        <tr>
+            <td>{{ habito.nombre_habito }}</td>
+            <td>{{ habito.descripcion }}</td>
+            <td>{{ habito.meta_diaria }}</td>
+            <td>{{ habito.usuario.nombre }}</td>
+            <td>
+                <a href="/editarhabito/{{ habito.idhabito }}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="/eliminarhabito/{{ habito.idhabito }}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+{% endblock %}

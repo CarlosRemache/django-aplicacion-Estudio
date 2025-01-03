@@ -1,0 +1,69 @@
+{% extends "./plantilla.html" %}
+
+{% block contenido %}
+
+<style>
+    /* Estilos generales para la tabla */
+    .tabla-progresos {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+
+    .tabla-progresos th, .tabla-progresos td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+
+    .tabla-progresos th {
+        background-color: #f4f4f4;
+    }
+
+    /* Estilo de los enlaces de acción */
+    .btn-eliminar {
+        background-color: #e74c3c;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 0.9em;
+    }
+
+    .btn-eliminar:hover {
+        opacity: 0.8;
+    }
+</style>
+
+<table class="tabla-progresos">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Tiempo Realizado (minutos)</th>
+            <th>Notas</th>
+            <th>Hábito</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for progreso in progresos %}
+        <tr>
+            <td>{{ progreso.fecha }}</td>
+            <td>{{ progreso.tiempo_realizado }}</td>
+            <td>{{ progreso.notas }}</td>
+            <td>{{ progreso.idhabito.nombre_habito }}</td>
+            <td>
+                <a href="/eliminarprogreso/{{ progreso.idprogreso }}" class="btn-eliminar">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+{% endblock %}

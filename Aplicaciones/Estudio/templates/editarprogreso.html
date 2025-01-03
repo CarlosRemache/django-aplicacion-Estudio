@@ -1,0 +1,101 @@
+{% extends "./plantilla.html" %}
+
+{% block contenido %}
+
+<style>
+    /* Estilo general del formulario */
+    .formulario-editar-progreso {
+        width: 50%;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+    }
+
+    h3 {
+        text-align: center;
+        color: #333;
+    }
+
+    label {
+        font-size: 1.1em;
+        color: #555;
+        margin-bottom: 5px;
+    }
+
+    input[type="date"], input[type="number"], textarea, select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+    }
+
+    textarea {
+        height: 100px;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    .button {
+        color: white;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+    
+    }
+
+    .button:hover {
+        opacity: 0.8;
+    }
+
+    .btn-container {
+        display: flex;
+        justify-content: space-between;
+    }
+</style>
+
+<form action="/procesareditarprogreso/" method="post" class="formulario-editar-progreso">
+    <h3>Editar Progreso</h3>
+    {% csrf_token %}
+
+    <input type="hidden" name="id" value="{{ progreso.idprogreso }}">
+
+    <label for="txt_fecha"><b>Fecha:</b></label>
+    <input type="date" name="txt_fecha" id="txt_fecha" value="{{ progreso.fecha }}" required>
+
+    <label for="txt_tiempo_realizado"><b>Tiempo Realizado (minutos):</b></label>
+    <input type="number" name="txt_tiempo_realizado" id="txt_tiempo_realizado" value="{{ progreso.tiempo_realizado }}" required>
+
+    <label for="txt_notas"><b>Notas:</b></label>
+    <textarea name="txt_notas" id="txt_notas">{{ progreso.notas }}</textarea>
+
+    <label for="habito_id"><b>Hábito:</b></label>
+    <select name="habito_id" id="habito_id">
+        {% for habito in habitos %}
+            <option value="{{ habito.idhabito }}" {% if habito.idhabito == progreso.idhabito.idhabito %}selected{% endif %}>
+                {{ habito.nombre_habito }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <div class="btn-container">
+        <button type="submit">Guardar</button>
+        <button type="button"><a href="/listadoprogreso" class="button">Cancelar</a></button>
+    </div>
+</form>
+
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends "./plantilla.html" %}
+
+{% block contenido %}
+
+<style>
+    /* Estilo general del formulario */
+    .formulario-editar-habito {
+        width: 50%;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+    }
+
+    h3 {
+        text-align: center;
+        color: #333;
+    }
+
+    label {
+        font-size: 1.1em;
+        color: #555;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"], input[type="number"], select, textarea {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+    }
+
+    textarea {
+        height: 100px;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    .button {
+        color: white;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+   
+    }
+
+    .button:hover {
+        opacity: 0.8;
+    }
+
+    .btn-container {
+        display: flex;
+        justify-content: space-between;
+    }
+</style>
+
+<form action="/procesareditarhabito/" method="post" class="formulario-editar-habito">
+    <h3>Editar Hábito</h3>
+    {% csrf_token %}
+
+    <input type="hidden" name="id" value="{{ habito.idhabito }}">
+
+    <label for="txt_nombre_habito"><b>Nombre del Hábito:</b></label>
+    <input type="text" name="txt_nombre_habito" id="txt_nombre_habito" value="{{ habito.nombre_habito }}" required>
+    <br>
+
+    <label for="txt_descripcion"><b>Descripción:</b></label>
+    <textarea name="txt_descripcion" id="txt_descripcion">{{ habito.descripcion }}</textarea>
+    <br>
+
+    <label for="txt_meta_diaria"><b>Meta Diaria:</b></label>
+    <input type="number" name="txt_meta_diaria" id="txt_meta_diaria" value="{{ habito.meta_diaria }}" required>
+    <br>
+
+    <label for="usuario_id"><b>Usuario:</b></label>
+    <select name="usuario_id" id="usuario_id">
+        {% for usuario in usuarios %}
+            <option value="{{ usuario.id }}" {% if usuario.id == habito.usuario.id %}selected{% endif %}>
+                {{ usuario.nombre }}
+            </option>
+        {% endfor %}
+    </select>
+    <br>
+
+    <div class="btn-container">
+        <button type="submit">Guardar</button>
+        <button type="button"><a href="/listadohabito" class="button">Cancelar</a></button>
+    </div>
+</form>
+
+{% endblock %}

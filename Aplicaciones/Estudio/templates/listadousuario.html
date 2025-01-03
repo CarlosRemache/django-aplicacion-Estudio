@@ -1,0 +1,75 @@
+{% extends "./plantilla.html" %}
+
+{% block contenido %}
+
+<style>
+    /* Estilos generales para la tabla */
+    .tabla-usuarios {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+    
+    .tabla-usuarios th, .tabla-usuarios td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+    
+    .tabla-usuarios th {
+        background-color: #f4f4f4;
+    }
+
+    /* Estilo de los botones */
+    .btn {
+        text-decoration: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 0.9em;
+        cursor: pointer;
+    }
+
+    .btn-warning {
+        background-color: #f39c12;
+        color: white;
+    }
+
+    .btn-danger {
+        background-color: #e74c3c;
+        color: white;
+    }
+
+    /* Estilo de los botones al pasar el mouse */
+    .btn:hover {
+        opacity: 0.8;
+    }
+</style>
+
+<table class="tabla-usuarios">
+    <thead>
+        <tr>
+            <th>NOMBRE</th>
+            <th>CORREO</th>
+            <th>ACCIONES</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for est in usuarios %}
+        <tr>
+            <td>{{ est.nombre }}</td>
+            <td>{{ est.correo }}</td>
+            <td>
+                <a href="/editarusuario/{{ est.id }}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="/eliminarusuario/{{ est.id }}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% endblock %}

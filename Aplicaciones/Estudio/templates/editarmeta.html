@@ -1,0 +1,107 @@
+{% extends "./plantilla.html" %}
+
+{% block contenido %}
+
+<style>
+    /* Estilo general del formulario */
+    .formulario-editar-meta {
+        width: 50%;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+    }
+
+    h3 {
+        text-align: center;
+        color: #333;
+    }
+
+    label {
+        font-size: 1.1em;
+        color: #555;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"], input[type="number"], input[type="date"], select, textarea {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+    }
+
+    textarea {
+        height: 100px;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    .button {
+        color: white;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+
+    }
+
+    .button:hover {
+        opacity: 0.8;
+    }
+
+    .btn-container {
+        display: flex;
+        justify-content: space-between;
+    }
+</style>
+
+<form action="/procesareditarmeta/" method="post" class="formulario-editar-meta">
+    <h3>Editar Meta</h3>
+    {% csrf_token %}
+
+    <input type="hidden" name="id" value="{{ meta.id }}">
+
+    <label for="habito_id"><b>Hábito:</b></label>
+    <select name="habito_id" id="habito_id" required>
+        {% for habito in habitos %}
+            <option value="{{ habito.idhabito }}" {% if habito.idhabito == meta.idhabito.idhabito %}selected{% endif %}>{{ habito.nombre_habito }}</option>
+        {% endfor %}
+    </select>
+    <br>
+
+    <label for="txt_nombre"><b>Nombre de la Meta:</b></label>
+    <input type="text" name="txt_nombre" id="txt_nombre" value="{{ meta.nombre }}" required>
+    <br>
+
+    <label for="txt_descripcion"><b>Descripción:</b></label>
+    <textarea name="txt_descripcion" id="txt_descripcion">{{ meta.descripcion }}</textarea>
+    <br>
+
+    <label for="txt_valor_meta"><b>Valor de la Meta:</b></label>
+    <input type="number" step="0.01" name="txt_valor_meta" id="txt_valor_meta" value="{{ meta.valor_meta }}" required>
+    <br>
+
+    <label for="txt_fecha_limite"><b>Fecha Límite:</b></label>
+    <input type="date" name="txt_fecha_limite" id="txt_fecha_limite" value="{{ meta.fecha_limite }}" required>
+    <br>
+
+    <div class="btn-container">
+        <button type="submit">Guardar</button>
+        <button type="button"><a href="/listadometa" class="button">Cancelar</a></button>
+    </div>
+</form>
+
+{% endblock %}

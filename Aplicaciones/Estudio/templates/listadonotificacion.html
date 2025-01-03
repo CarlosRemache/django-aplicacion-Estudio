@@ -1,0 +1,85 @@
+{% extends "./plantilla.html" %}
+
+{% block contenido %}
+
+<style>
+    /* Estilos generales para la tabla */
+    .tabla-notificaciones {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+
+    .tabla-notificaciones th, .tabla-notificaciones td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+
+    .tabla-notificaciones th {
+        background-color: #f4f4f4;
+    }
+
+    /* Estilo de los botones */
+    .btn {
+        text-decoration: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 0.9em;
+        cursor: pointer;
+    }
+
+    .btn-warning {
+        background-color: #f39c12;
+        color: white;
+    }
+
+    .btn-danger {
+        background-color: #e74c3c;
+        color: white;
+    }
+
+    /* Estilo de los botones al pasar el mouse */
+    .btn:hover {
+        opacity: 0.8;
+    }
+</style>
+
+<table class="tabla-notificaciones">
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>Hábito</th>
+            <th>Hora Programada</th>
+            <th>Fecha Programada</th>
+            <th>Frecuencia</th>
+            <th>Minutos Realizados</th>  
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for notificacion in notificaciones %}
+        <tr>
+            <td>{{ notificacion.usuario.nombre }}</td>
+            <td>{{ notificacion.idhabito.nombre_habito }}</td>
+            <td>{{ notificacion.hora }}</td>
+            <td>{{ notificacion.fecha_programada }}</td>
+            <td>{{ notificacion.frecuencia }}</td>
+            <td>{{ notificacion.tiempo_realizado }}</td>
+            <td>
+                <a href="/editarnotificacion/{{ notificacion.id }}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="/eliminarnotificacion/{{ notificacion.id }}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% endblock %}

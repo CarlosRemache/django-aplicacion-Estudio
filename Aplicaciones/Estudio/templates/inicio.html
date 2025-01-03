@@ -1,0 +1,56 @@
+{% extends "./plantilla.html" %}
+{% block contenido %}
+
+<div class="container my-5">
+  <center>
+    <h3 class="mb-4">¡BIENVENIDOS!</h3>
+    <h4 class="mb-3">Seguimiento de Hábitos de Estudio</h4>
+    <h5>Esperamos que disfrutes de nuestra aplicación web</h5>
+  </center>
+  
+  <div id="carouselExampleIndicators" class="carousel slide mt-5">
+    <!-- Indicadores -->
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+
+    <!-- Imágenes del carrusel -->
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="https://www.psicologosmadridcapital.com/wp-content/uploads/2016/06/estrategias-tecnicas-estudio-1.jpg" class="d-block w-100" style="height: 500px; object-fit: cover;" alt="Técnicas de estudio">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Técnicas de Estudio</h5>
+          <p>Descubre cómo mejorar tus hábitos de estudio.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="https://www.brasileiraspelomundo.com/wp-content/uploads/2019/04/Foto-Maio-correta-e1555174829148.jpg" class="d-block w-100" style="height: 500px; object-fit: cover;" alt="Estudiantes colaborando">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Trabajo en Equipo</h5>
+          <p>Logra tus metas colaborando contigo.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZOg9FyaZ54oQjOZN-JvyqR_CuS8UtvO9Qkw&s" class="d-block w-100" style="height: 500px; object-fit: cover;" alt="Registro de hábitos">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Registra tu Progreso</h5>
+          <p>Controla y mejora tu desarrollo día a día.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controles -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
+  </div>
+</div>
+
+{% endblock %}

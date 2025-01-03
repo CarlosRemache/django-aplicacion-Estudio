@@ -1,0 +1,114 @@
+{% extends "./plantilla.html" %}
+
+{% block contenido %}
+
+<style>
+    /* Estilo general del formulario */
+    .formulario-editar-notificacion {
+        width: 50%;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+    }
+
+    h3 {
+        text-align: center;
+        color: #333;
+    }
+
+    label {
+        font-size: 1.1em;
+        color: #555;
+        margin-bottom: 5px;
+    }
+
+    input[type="time"], input[type="datetime-local"], input[type="number"], select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    .button {
+        color: white;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+
+    }
+
+    .button:hover {
+        opacity: 0.8;
+    }
+
+    .btn-container {
+        display: flex;
+        justify-content: space-between;
+    }
+</style>
+
+<form action="/procesareditarnotificacion/" method="post" class="formulario-editar-notificacion">
+    <h3>Editar Notificación</h3>
+    {% csrf_token %}
+
+    <input type="hidden" name="id" value="{{ notificacion.id }}">
+
+    <label for="usuario_id"><b>Usuario:</b></label>
+    <select name="usuario_id" id="usuario_id" required>
+        {% for usuario in usuarios %}
+            <option value="{{ usuario.id }}" {% if usuario.id == notificacion.usuario.id %}selected{% endif %}>{{ usuario.nombre }}</option>
+        {% endfor %}
+    </select>
+    <br>
+
+    <label for="habito_id"><b>Hábito:</b></label>
+    <select name="habito_id" id="habito_id" required>
+        {% for habito in habitos %}
+            <option value="{{ habito.idhabito }}" {% if habito.idhabito == notificacion.idhabito.idhabito %}selected{% endif %}>{{ habito.nombre_habito }}</option>
+        {% endfor %}
+    </select>
+    <br>
+
+    <label for="txt_hora"><b>Hora:</b></label>
+    <input type="time" name="txt_hora" id="txt_hora" value="{{ notificacion.hora }}" required>
+    <br>
+
+    <label for="txt_fecha_programada"><b>Fecha Programada:</b></label>
+    <input type="datetime-local" name="txt_fecha_programada" id="txt_fecha_programada" value="{{ notificacion.fecha_programada|date:'Y-m-d\TH:i' }}" required>
+    <br>
+
+    <label for="txt_frecuencia"><b>Frecuencia:</b></label>
+    <select name="txt_frecuencia" id="txt_frecuencia" required>
+        <option value="Diaria" {% if notificacion.frecuencia == 'Diaria' %}selected{% endif %}>Diaria</option>
+        <option value="Semanal" {% if notificacion.frecuencia == 'Semanal' %}selected{% endif %}>Semanal</option>
+    </select>
+    <br>
+
+    <label for="txt_tiempo_realizado"><b>Minutos Realizados:</b></label>
+    <input type="number" name="txt_tiempo_realizado" id="txt_tiempo_realizado" min="0" value="{{ notificacion.tiempo_realizado }}" required>
+    <br>
+
+    <div class="btn-container">
+        <button type="submit">Guardar</button>
+        <button type="button"><a href="/listadonotificacion" class="button">Cancelar</a></button>
+    </div>
+</form>
+
+{% endblock %}
